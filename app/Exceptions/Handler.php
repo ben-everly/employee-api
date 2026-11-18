@@ -27,4 +27,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    /**
+     * `api/*` only returns JSON responses. This overrides Laravel's default behavior of
+     * sending HTML error pages and redirects (302) on validation failures.
+     */
+    protected function shouldReturnJson($request, Throwable $e)
+    {
+        return $request->is('api/*') || parent::shouldReturnJson($request, $e);
+    }
 }

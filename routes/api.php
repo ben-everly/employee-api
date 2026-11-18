@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,3 +13,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::apiResource('employees', EmployeeController::class)
+    ->only(['index', 'show', 'store', 'destroy'])
+    ->where(['employee' => '[0-9]+']);
