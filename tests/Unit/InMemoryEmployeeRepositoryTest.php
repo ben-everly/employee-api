@@ -34,6 +34,16 @@ class InMemoryEmployeeRepositoryTest extends TestCase
         $this->assertNull($this->repository->find(999));
     }
 
+    public function test_find_by_email_returns_matching_employee_ignoring_case(): void
+    {
+        $this->assertSame(1, $this->repository->findByEmail('John.Smith@Example.com')?->id);
+    }
+
+    public function test_find_by_email_returns_null_for_unknown_email(): void
+    {
+        $this->assertNull($this->repository->findByEmail('nobody@example.com'));
+    }
+
     public function test_create_assigns_the_next_id_and_the_employee_can_be_found(): void
     {
         $new = $this->repository->create('test', 'employee', 'test.employee@example.com');

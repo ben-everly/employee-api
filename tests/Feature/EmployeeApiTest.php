@@ -88,6 +88,17 @@ class EmployeeApiTest extends TestCase
             ->assertJsonMissingValidationErrors(['firstName', 'lastName']);
     }
 
+    public function test_store_rejects_a_duplicate_email(): void
+    {
+        $this->postJson('/api/employees', [
+            'firstName' => 'Johnny',
+            'lastName' => 'Smith',
+            'email' => 'john.smith@example.com',
+        ])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['email' => 'already been taken']);
+    }
+
     public function test_destroy_deletes_the_employee(): void
     {
         $this->deleteJson('/api/employees/1')

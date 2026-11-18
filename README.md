@@ -49,6 +49,7 @@ curl --json '{"firstName": "Ben", "lastName": "Everly", "email": "ben@example.co
 | ---------------------------- | --------------------------------------------------------- |
 | `EmployeeController`         | HTTP only: delegates to the repository, returns responses |
 | `StoreEmployeeRequest`       | Validates new employee data                               |
+| `UniqueEmployeeEmail`        | Validation rule rejecting duplicate emails                |
 | `EmployeeResource`           | Shapes the JSON response                                  |
 | `EmployeeRepository`         | Data-access interface                                     |
 | `InMemoryEmployeeRepository` | In-memory implementation, bound as a singleton            |

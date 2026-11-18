@@ -31,6 +31,13 @@ final class InMemoryEmployeeRepository implements EmployeeRepository
         return $this->collection->get($id);
     }
 
+    public function findByEmail(string $email): ?Employee
+    {
+        return $this->collection->first(
+            fn (Employee $employee) => strcasecmp($employee->email, $email) === 0
+        );
+    }
+
     public function create(string $firstName, string $lastName, string $email): Employee
     {
         $employee = new Employee(
